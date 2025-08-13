@@ -11,5 +11,3 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   synchronize: true,
   logging: true,
 };
-
-console.log(typeOrmConfig);
