@@ -8,4 +8,11 @@ export class AuthRequestDto {
     // description: 'this is name of swagger study',
   })
   code: string;
+
+  @IsString()
+  @ApiProperty({
+    example: 'https://mugunghwa-re.netlify.app/oauth',
+    // description: 'this is name of swagger study',
+  })
+  redirectUri: string;
 }

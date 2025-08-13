@@ -22,7 +22,7 @@ export class AuthController {
     @Body() authRequestDto: AuthRequestDto,
     @Res() res: Response,
   ) {
-    const result = await this.authService.kakaoLogin(authRequestDto.code);
+    const result = await this.authService.kakaoLogin(authRequestDto);
 
     if (result.status == 'LOGIN_SUCCESS') {
       res.cookie('refreshToken', result.refreshToken);

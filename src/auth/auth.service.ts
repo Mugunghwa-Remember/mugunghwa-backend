@@ -8,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import * as bcrypt from 'bcrypt';
 import { UserEntity } from 'src/user/entities/user.entity';
+import { AuthRequestDto } from './dto/auth-request.dto';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +17,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async kakaoLogin(code: string): Promise<{
+  async kakaoLogin(authRequestDto: AuthRequestDto): Promise<{
     status: string;
     accessToken?: string;
     refreshToken?: string;
@@ -33,8 +34,8 @@ export class AuthService {
         body: new URLSearchParams({
           grant_type: 'authorization_code',
           client_id: process.env.KAKAO_CLIENT_ID!,
-          redirect_uri: process.env.KAKAO_REDIRECT_URI!,
-          code,
+          redirect_uri: authRequestDto.redirectUri,
+          code: authRequestDto.code,
           client_secret: process.env.KAKAO_CLIENT_SECRET || '', // 생략 가능
         }).toString(),
       });
